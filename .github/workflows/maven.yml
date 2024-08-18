@@ -52,7 +52,7 @@ jobs:
       run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     
     - name: Build Docker image
-      run: docker build --build-arg JAR_FILE=target/*.jar -t yairomer23/myapp:${{ env.VERSION }} .
+      run: docker build -t yairomer23/myapp:${{ env.VERSION }} 
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
