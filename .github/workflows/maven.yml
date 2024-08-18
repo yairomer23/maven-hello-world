@@ -54,6 +54,9 @@ jobs:
     - name: Build Docker image
       run: docker build --build-arg JAR_FILE=target/*.jar -t myapp:${{ env.VERSION }} .
 
+    - name: Push Docker image
+      run: docker push ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ env.VERSION }}
+
 
     #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
