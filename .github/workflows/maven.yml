@@ -52,13 +52,13 @@ jobs:
       run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     
     - name: Build Docker image
-      run: docker build ./ -t yairomer23/myapp:${{ env.VERSION }} 
+      run: docker build ./ -t yairomer23/myapp:latest 
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
     
     - name: Push Docker image
-      run: docker push yairomer/myapp:${{ env.VERSION }}
+      run: docker push yairomer/myapp:latest
 
     #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
