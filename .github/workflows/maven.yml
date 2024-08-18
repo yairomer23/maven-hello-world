@@ -61,7 +61,7 @@ jobs:
       run: docker tag myapp:${{ env.VERSION }} myapp:${{ env.VERSION }}
       
     - name: Push Docker image
-      run: docker push yairomer/myapp:${{ env.VERSION }}
+      run: docker push ./myapp:${{ env.VERSION }}
 
 
     #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
