@@ -58,7 +58,7 @@ jobs:
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
     
     - name: Push Docker image
-      run: docker push yairomer/myapp:latest
+      run: docker push docker.io/yairomer23/myapp:latest
 
     #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
