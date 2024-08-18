@@ -48,6 +48,10 @@ jobs:
         name: hello-world-artifact
         path: target/*.jar
 
+     - name: Build Docker image
+       run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
+       run: docker build --build-arg JAR_FILE=target/*.jar -t myapp:${{ env.VERSION }} .
+
 
     #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
