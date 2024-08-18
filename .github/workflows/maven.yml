@@ -59,4 +59,4 @@ jobs:
       with:
          context: .
          push: true
-         tags: ${{ env.DOCKER_HUB_USERNAME }}/myapp:${{ env.VERSION }}
+         tags: ${{ github.DOCKER_HUB_USERNAME }}/myapp:${{ env.VERSION }}
