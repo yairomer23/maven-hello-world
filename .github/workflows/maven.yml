@@ -51,9 +51,6 @@ jobs:
     - name: Get version
       run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     
-  #  - name: Build Docker image
-   #   run: docker build ./ -t myapp:${{ env.VERSION }}
-
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
@@ -62,11 +59,4 @@ jobs:
       with:
          context: .
          push: true
-         tags: yairomer/myapp:${{ env.VERSION }}
-  
-  #  - name: Push Docker image
-   #   run: docker push docker.io/yairomer/myapp:latest
-
-    #Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
-    - name: Update dependency graph
-      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
+         tags: ${{ secrets.DOCKER_HUB_USERNAME }}/myapp:${{ env.VERSION }}
