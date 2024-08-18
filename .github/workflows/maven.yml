@@ -51,12 +51,19 @@ jobs:
     - name: Get version
       run: echo "VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
     
-    - name: Build Docker image
-      run: docker build ./ -t myapp:${{ env.VERSION }}
+  #  - name: Build Docker image
+   #   run: docker build ./ -t myapp:${{ env.VERSION }}
 
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
-    
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+         context: .
+         push: true
+         tags: yairomer/myapp:${{ env.VERSION }}
+  
   #  - name: Push Docker image
    #   run: docker push docker.io/yairomer/myapp:latest
 
